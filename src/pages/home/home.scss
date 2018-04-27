@@ -26,7 +26,7 @@ page-home {
     width: calc(50% - 2px);
     min-height: 474px;
     width: 68px;
-    border: solid black 1px;
+    background-color: #b8e7f7;
 }
 
 #level-water{
@@ -35,4 +35,9 @@ page-home {
     min-height       : 400px;
     width            : 68px;
     background-color : blue;
+}
+
+#level-status{
+    font-weight: bold;
+    font-size: 33px;
 }
