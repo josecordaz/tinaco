@@ -24,17 +24,19 @@ page-home {
 #t1{
     display: inline-block;
     width: calc(50% - 2px);
-    background-color: lightgray;
+    background-color: blue;
     min-height: 350px;
     width: 40px;
     margin-left: 20px;
+    border: solid black 1px;
 }
 
 #t2{
     display: inline-block;
     width: calc(50% - 2px);
-    background-color: gray;
+    background-color: blue;
     min-height: 350px;
     width: 40px;
     margin-left: 15px;
+    border: solid black 1px;
 }

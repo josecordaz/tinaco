@@ -1,6 +1,6 @@
 {
   "name": "tinaco",
-  "app_id": "",
+  "app_id": "926bcc67",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
