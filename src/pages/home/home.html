@@ -7,21 +7,21 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <!--ion-card-->
 
     <!--ion-card-header>
       Card Header
     </ion-card-header-->
   
-    <ion-card-content>
+    <!--ion-card-content-->
       <!-- Add card content here! -->
-      <div id="main-ui">
+      <!--div id="main-ui">
         <div id="water-level">
           <div id="t1">1</div>
           <div id="t2">2</div>
         </div>
         <div id="options">
-          DOS
+          <button ion-button color="secondary" small>Encender bomba</button>
         </div>
       </div>
       <div id="logs">
@@ -32,5 +32,46 @@
       </div>
     </ion-card-content>
   
-  </ion-card>
+  </ion-card-->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-row>
+          <ion-col col-6>
+            <div id="t1">1</div>
+          </ion-col>
+          <ion-col col-6>
+            <div id="t2">2</div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6>
+        <ion-row>
+          <ion-col col-12>
+            <button ion-button color="secondary">Encender bomba</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+          <!--ion-list-->
+
+            <ion-item>
+              <ion-label stacked>% Water level</ion-label>
+              <ion-input type="number"></ion-input>
+            </ion-item>
+          
+          <!--/ion-list-->
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        This area will be for logs
+      </ion-col>
+      <ion-col col-12>
+        Server direccion
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
