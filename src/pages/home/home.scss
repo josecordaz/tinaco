@@ -24,8 +24,15 @@ page-home {
 #t1{
     display: inline-block;
     width: calc(50% - 2px);
-    background-color: blue;
-    min-height: 555px;
+    min-height: 474px;
     width: 68px;
     border: solid black 1px;
+}
+
+#level-water{
+    position         : absolute;
+    bottom           : 8px;
+    min-height       : 400px;
+    width            : 68px;
+    background-color : blue;
 }
