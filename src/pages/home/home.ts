@@ -3,13 +3,16 @@ import { NavController } from 'ionic-angular';
 
 import { HttpClient } from '@angular/common/http';
 
+import { Observable} from 'rxjs/Rx';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
   
-  server_ip: String  = "192.168.1.72"
+  server_ip: String  = "localhost"
+  // 192.168.1.72
   status_server: String = ""
   icon_server_status: String = ""
   color_server_status: String = ""
@@ -24,7 +27,13 @@ export class HomePage {
   status_str_bomba : string = "Encender"
   bomb_state_color : string = "secondary"
 
+  obs;
+
   constructor(public navCtrl: NavController, private http: HttpClient) {
+    this.obs = Observable
+    .interval(2000)
+
+    
     // this.http.get('http://192.168.1.72:8000/con').subscribe(data => {
     //   alert(data)
     //   console.log('data',data);
@@ -43,7 +52,8 @@ export class HomePage {
         // setTimeout(()=>{
           this.color_server_status = "secondary"
           this.icon_server_status = "md-checkmark"
-          this.readWaterLevel()
+          this.obs.subscribe(value => this.readWaterLevel());
+          
         // },2000)
       } else {
         this.icon_server_status = "md-close"
