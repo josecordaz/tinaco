@@ -20,6 +20,9 @@ export class HomePage {
 
   water_level: Number = 0
 
+  bomb_state : boolean = false
+  status_str_bomba : string = "Encender"
+
   constructor(public navCtrl: NavController, private http: HttpClient) {
     // this.http.get('http://192.168.1.72:8000/con').subscribe(data => {
     //   alert(data)
@@ -67,5 +70,19 @@ export class HomePage {
         this.color_level_status = "danger"
       }
     });
+  }
+
+  changeBombStatus(){
+    this.bomb_state = !this.bomb_state;
+    if ( this.bomb_state ){
+      this.http.get('http://'+this.server_ip+':8000/b_on').subscribe(data => {
+        this.status_str_bomba = "Apagar"
+      })
+    } else {
+      this.http.get('http://'+this.server_ip+':8000/b_off').subscribe(data => {
+        this.status_str_bomba = "Encender"
+      })
+    }
+    
   }
 }
