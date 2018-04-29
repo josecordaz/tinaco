@@ -22,6 +22,7 @@ export class HomePage {
 
   bomb_state : boolean = false
   status_str_bomba : string = "Encender"
+  bomb_state_color : string = "secondary"
 
   constructor(public navCtrl: NavController, private http: HttpClient) {
     // this.http.get('http://192.168.1.72:8000/con').subscribe(data => {
@@ -77,10 +78,12 @@ export class HomePage {
     if ( this.bomb_state ){
       this.http.get('http://'+this.server_ip+':8000/b_on').subscribe(data => {
         this.status_str_bomba = "Apagar"
+        this.bomb_state_color = "danger"
       })
     } else {
       this.http.get('http://'+this.server_ip+':8000/b_off').subscribe(data => {
         this.status_str_bomba = "Encender"
+        this.bomb_state_color = "secondary"
       })
     }
     
