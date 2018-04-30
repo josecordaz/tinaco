@@ -48,7 +48,7 @@
                    </ion-item>
                 </ion-col>
                 <ion-col col-5>
-                   <button ion-button small (click)="connect()">Conectar</button>
+                   <button ion-button small (click)="connect()">Consultar niveles</button>
                 </ion-col>
              </ion-row>
              <ion-row>
@@ -59,12 +59,12 @@
                 </ion-col>
              </ion-row>
              <ion-row>
-                <ion-col col-12>
+                <!--ion-col col-12>
                    <ion-item>
                       {{status_server}}
                       <ion-icon name="{{icon_server_status}}" item-end color="{{color_server_status}}"></ion-icon>
                    </ion-item>
-                </ion-col>
+                </ion-col-->
                 <ion-col col-12>
                    <ion-item>
                       {{status_reading_level}}
@@ -73,17 +73,17 @@
                 </ion-col>
                 <ion-col col-12>
                    <ion-item>
-                      Bomba encendida
-                      <ion-icon name="md-close" item-end></ion-icon>
+                      Estado de la bomba
+                      <ion-icon name="{{bomb_state_icon}}" item-end color="{{bomb_state_color}}"></ion-icon>
                    </ion-item>
                 </ion-col>
              </ion-row>
              <ion-row justify-content-center align-items-center>
                 <ion-col col-10 offset-1>
-                    <button ion-button color="{{bomb_state_color}}" large (click)="changeBombStatus()" >{{status_str_bomba}} bomba</button>
+                    <button ion-button [color]="bomb_state ? 'danger' : 'secondary' " large (click)="changeBombStatus()">{{bomb_button_status_str}} bomba</button>
                   </ion-col>
                   <ion-col col-1>
-                    <br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br>
                   </ion-col>
              </ion-row>
           </ion-col>

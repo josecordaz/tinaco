@@ -11,11 +11,7 @@ import { Observable} from 'rxjs/Rx';
 })
 export class HomePage {
   
-  server_ip: String  = "localhost"
-  // 192.168.1.72
-  status_server: String = ""
-  icon_server_status: String = ""
-  color_server_status: String = ""
+  server_ip: String  = "192.168.1.85"
   
   status_reading_level: String = ""
   icon_level_status: String = ""
@@ -24,45 +20,31 @@ export class HomePage {
   water_level: Number = 0
 
   bomb_state : boolean = false
-  status_str_bomba : string = "Encender"
-  bomb_state_color : string = "secondary"
+
+  bomb_button_status_str : string = "Encender"
 
   obs;
+
+  bomb_state_icon: string = ""
+  bomb_state_color: string = ""
 
   constructor(public navCtrl: NavController, private http: HttpClient) {
     this.obs = Observable
     .interval(2000)
-
-    
-    // this.http.get('http://192.168.1.72:8000/con').subscribe(data => {
-    //   alert(data)
-    //   console.log('data',data);
-    // });
   }
 
   connect(){
-    this.status_server = "Conectando...";
     this.water_level = 0;
-    this.icon_server_status = "";
-    this.color_server_status = "";
     this.status_reading_level = ""
     this.icon_level_status = "";
-    this.http.get('http://'+this.server_ip+':8000/con').subscribe(data => {
-      if( data['status'] != undefined ){
-        // setTimeout(()=>{
-          this.color_server_status = "secondary"
-          this.icon_server_status = "md-checkmark"
-          this.obs.subscribe(value => this.readWaterLevel());
-          
-        // },2000)
-      } else {
-        this.icon_server_status = "md-close"
-        this.color_server_status = "danger"
-      }
-    }, err => {
-      alert("err:"+JSON.stringify(err))
-    });
-    
+    // this.http.get('http://'+this.server_ip+':8000/con').subscribe(data => {
+    //   if( data['status'] != undefined ){
+    this.obs.subscribe(value => this.readWaterLevel());
+    this.obs.subscribe(value => this.readBombStatus());
+    // }
+    // }, err => {
+    //   alert("err:"+JSON.stringify(err))
+    // });
   }
 
   readWaterLevel(){
@@ -83,16 +65,43 @@ export class HomePage {
     });
   }
 
+  readBombStatus(){
+    this.status_reading_level = "Midiendo niveles..."
+    this.http.get('http://'+this.server_ip+':8000/b_status').subscribe(data => {
+      if( data['status'] != undefined ){
+
+        console.log("status true")
+
+        this.bomb_state = data['status'];
+
+        this.bomb_state_icon = "md-checkmark"
+        this.bomb_state_color = "secondary"
+
+        this.bomb_button_status_str = "Apagar"
+
+      } else {
+        console.log("status false")
+
+        this.bomb_state = false;
+
+        this.bomb_state_icon = "md-close"
+        this.bomb_state_color = "danger"
+
+        this.bomb_button_status_str = "Encender"
+
+      }
+    });
+  }
+
   changeBombStatus(){
-    this.bomb_state = !this.bomb_state;
-    if ( this.bomb_state ){
+    if ( !this.bomb_state ){
       this.http.get('http://'+this.server_ip+':8000/b_on').subscribe(data => {
-        this.status_str_bomba = "Apagar"
+        this.bomb_button_status_str = "Apagar"
         this.bomb_state_color = "danger"
       })
     } else {
       this.http.get('http://'+this.server_ip+':8000/b_off').subscribe(data => {
-        this.status_str_bomba = "Encender"
+        this.bomb_button_status_str = "Encender"
         this.bomb_state_color = "secondary"
       })
     }
