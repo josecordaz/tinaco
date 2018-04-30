@@ -96,13 +96,13 @@ export class HomePage {
   changeBombStatus(){
     if ( !this.bomb_state ){
       this.http.get('http://'+this.server_ip+':8000/b_on').subscribe(data => {
-        this.bomb_button_status_str = "Apagar"
-        this.bomb_state_color = "danger"
+        // this.bomb_button_status_str = "Apagar"
+        // this.bomb_state_color = "danger"
       })
     } else {
       this.http.get('http://'+this.server_ip+':8000/b_off').subscribe(data => {
-        this.bomb_button_status_str = "Encender"
-        this.bomb_state_color = "secondary"
+        // this.bomb_button_status_str = "Encender"
+        // this.bomb_state_color = "secondary"
       })
     }
     
