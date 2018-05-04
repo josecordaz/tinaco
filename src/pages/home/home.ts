@@ -11,7 +11,7 @@ import { Observable} from 'rxjs/Rx';
 })
 export class HomePage {
   
-  server_ip: String  = "192.168.1.85"
+  server_ip: String  = "192.168.1.72"
   
   status_reading_level: String = ""
   icon_level_status: String = ""
@@ -28,6 +28,9 @@ export class HomePage {
   bomb_state_icon: string = ""
   bomb_state_color: string = ""
 
+  s1: any
+  s2: any
+
   constructor(public navCtrl: NavController, private http: HttpClient) {
     this.obs = Observable
     .interval(2000)
@@ -37,19 +40,37 @@ export class HomePage {
     this.water_level = 0;
     this.status_reading_level = ""
     this.icon_level_status = "";
+
+
+    if (this.s1) {
+      this.s1.unsubscribe();
+    }
+    this.status_reading_level = "Midiendo niveles..."
+    this.s1 = this.obs.switchMap((val)=> this.http.get('http://'+this.server_ip+':8000/level')).subscribe(data=>this.readWaterLevel(data))
+
+    if (this.s2) {
+      this.s2.unsubscribe();
+    }
+    // this.status_reading_level = "Midiendo niveles..."
+    this.s1 = this.obs.switchMap((val)=> this.http.get('http://'+this.server_ip+':8000/b_status')).subscribe(data=>this.readBombStatus(data))
+
+    
+
     // this.http.get('http://'+this.server_ip+':8000/con').subscribe(data => {
     //   if( data['status'] != undefined ){
-    this.obs.subscribe(value => this.readWaterLevel());
-    this.obs.subscribe(value => this.readBombStatus());
+    // if (this.s1) {
+    //   this.s1 = null
+    // }
+    // this.obs.map(val => this.readWaterLevel()).last(val).subscribe(value => );
+    
+    // this.obs.last.subscribe(value => this.readBombStatus());
     // }
     // }, err => {
     //   alert("err:"+JSON.stringify(err))
     // });
   }
 
-  readWaterLevel(){
-    this.status_reading_level = "Midiendo niveles..."
-    this.http.get('http://'+this.server_ip+':8000/level').subscribe(data => {
+  readWaterLevel(data){
       if( data['level'] != undefined ){
         console.log('level',data['level'])
         this.water_level = data['level'];
@@ -62,12 +83,11 @@ export class HomePage {
         this.icon_level_status = "md-close"
         this.color_level_status = "danger"
       }
-    });
   }
 
-  readBombStatus(){
-    this.status_reading_level = "Midiendo niveles..."
-    this.http.get('http://'+this.server_ip+':8000/b_status').subscribe(data => {
+  readBombStatus(data){
+    // this.status_reading_level = "Midiendo niveles..."
+    // this.http.get('http://'+this.server_ip+':8000/b_status').subscribe(data => {
       if( data['status'] != undefined ){
 
         console.log("status true")
@@ -90,7 +110,7 @@ export class HomePage {
         this.bomb_button_status_str = "Encender"
 
       }
-    });
+    // });
   }
 
   changeBombStatus(){
