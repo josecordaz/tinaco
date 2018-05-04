@@ -69,6 +69,7 @@
                    <ion-item>
                       {{status_reading_level}}
                       <ion-icon name="{{icon_level_status}}" item-end color="{{color_level_status}}"></ion-icon>
+                      <ion-spinner item-end [hidden]="status_loading"></ion-spinner>
                    </ion-item>
                 </ion-col>
                 <ion-col col-12>
