@@ -11,7 +11,7 @@ import { Observable} from 'rxjs/Rx';
 })
 export class HomePage {
   
-  server_ip: String  = "192.168.1.72"
+  server_ip: String  = "tinaco2.tk"
   
   status_reading_level: String = ""
   icon_level_status: String = ""
@@ -50,14 +50,14 @@ export class HomePage {
     this.status_reading_level = "Midiendo niveles..."
     // this.s1 = this.obs.switchMap((val)=> this.http.get('http://'+this.server_ip+':8000/level')).subscribe(data=>this.readWaterLevel(data))
     this.status_loading = false
-    this.s1 = this.http.get('http://'+this.server_ip+':8000/level').subscribe(data=>this.readWaterLevel(data))
+    this.s1 = this.http.get('https://'+this.server_ip+'/level').subscribe(data=>this.readWaterLevel(data))
 
     if (this.s2) {
       this.s2.unsubscribe();
     }
     // this.status_reading_level = "Midiendo niveles..."
     // this.s1 = this.obs.switchMap((val)=> this.http.get('http://'+this.server_ip+':8000/b_status')).subscribe(data=>this.readBombStatus(data))
-    this.s1 = this.http.get('http://'+this.server_ip+':8000/b_status').subscribe(data=>this.readBombStatus(data))
+    this.s1 = this.http.get('https://'+this.server_ip+'/b_status').subscribe(data=>this.readBombStatus(data))
 
     
 
@@ -121,13 +121,13 @@ export class HomePage {
 
   changeBombStatus(){
     if ( !this.bomb_state ){
-      this.http.get('http://'+this.server_ip+':8000/b_on').subscribe(data => {
+      this.http.get('https://'+this.server_ip+'/b_on').subscribe(data => {
         this.readBombStatus(data)
         // this.bomb_button_status_str = "Apagar"
         // this.bomb_state_color = "danger"
       })
     } else {
-      this.http.get('http://'+this.server_ip+':8000/b_off').subscribe(data => {
+      this.http.get('https://'+this.server_ip+'/b_off').subscribe(data => {
         this.readBombStatus(data)
         // this.bomb_button_status_str = "Encender"
         // this.bomb_state_color = "secondary"
