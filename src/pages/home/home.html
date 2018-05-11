@@ -6,7 +6,7 @@
     </ion-navbar>
  </ion-header>
  <ion-content padding>
-    <ion-grid>
+    <ion-grid *ngIf="authService.isAuthenticated">
        <ion-row>
           <ion-col col-3>
              <ion-row>
@@ -42,10 +42,18 @@
              </ion-row>
              <ion-row justify-content-center>
                 <ion-col col-12>
-                   <ion-item>
+                   <!--ion-item>
                       <ion-label stacked>Server</ion-label>
                       <ion-input type="text" [(ngModel)]="server_ip"></ion-input>
-                   </ion-item>
+                   </ion-item-->
+                   <ion-item>
+                      <ion-label stacked>Server</ion-label>
+                      <ion-select [(ngModel)]="server_ip">
+                        <ion-option value="http://localhost:8080">http://localhost:8080</ion-option>
+                        <ion-option value="http://localhost:8082">http://localhost:8082</ion-option>
+                        <ion-option value="https://tinaco2.tk">https://tinaco2.tk</ion-option>
+                      </ion-select>
+                    </ion-item>
                 </ion-col>
                 <ion-col col-5>
                    <button ion-button small (click)="connect()">Consultar niveles</button>
@@ -89,5 +97,12 @@
              </ion-row>
           </ion-col>
        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="!authService.isAuthenticated">
+      <ion-row justify-content-center>
+          <ion-col col-4>
+              <button ion-button color="secondary" large (click)="login()">Login</button>
+          </ion-col>
+      </ion-row>
     </ion-grid>
  </ion-content>
