@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
+    // API_URL = 'http://192.168.1.72:8082';
     API_URL = 'http://localhost:8082';
     TOKEN_KEY = 'token';
 
@@ -41,7 +42,4 @@ export class AuthService {
         return this.http.post(this.API_URL + '/login', data, headers)
     }
 
-    getAccount() {
-        return this.http.get(this.API_URL + '/account');
-    }
 }

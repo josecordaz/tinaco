@@ -12,7 +12,7 @@ import { AuthService } from '../../app/auth.service';
 export class HomePage {
   TOKEN_KEY = 'token';
   
-  server_ip: string  = "localhost"
+  server_ip: string  = ""
   server_port: string = "8082"
   
   status_reading_level: string = ""
@@ -24,8 +24,6 @@ export class HomePage {
   bomb_state : boolean = false
 
   bomb_button_status_str : string = "Encender"
-
-  obs;
 
   bomb_state_icon: string = ""
   bomb_state_color: string = ""
@@ -60,6 +58,7 @@ export class HomePage {
     this.s2 = this.http.get(this.authService.API_URL+'/b_status').subscribe(data=>this.readBombStatus(data),err=>{
       alert("Error Leyendo Bomba"+JSON.stringify(err))
     })
+    
   }
 
   readWaterLevel(data){
@@ -108,8 +107,12 @@ export class HomePage {
   }
 
   login(){
+    console.log(this.server_ip)
+    alert(document.URL)
     this.authService.login("admin@gmail.com","admin123").subscribe(
       (res: any) => {
+          this.status_loading = true
+          this.changeBombStatus()
           localStorage.setItem(this.TOKEN_KEY, res.token);
       },err=>{
         alert("Error Login"+JSON.stringify(err))

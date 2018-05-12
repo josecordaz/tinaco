@@ -41,22 +41,8 @@
                 </ion-col>
              </ion-row>
              <ion-row justify-content-center>
-                <ion-col col-12>
-                   <!--ion-item>
-                      <ion-label stacked>Server</ion-label>
-                      <ion-input type="text" [(ngModel)]="server_ip"></ion-input>
-                   </ion-item-->
-                   <ion-item>
-                      <ion-label stacked>Server</ion-label>
-                      <ion-select [(ngModel)]="server_ip">
-                        <ion-option value="http://localhost:8080">http://localhost:8080</ion-option>
-                        <ion-option value="http://localhost:8082">http://localhost:8082</ion-option>
-                        <ion-option value="https://tinaco2.tk">https://tinaco2.tk</ion-option>
-                      </ion-select>
-                    </ion-item>
-                </ion-col>
-                <ion-col col-5>
-                   <button ion-button small (click)="connect()">Consultar niveles</button>
+                <ion-col col-10>
+                    <button ion-button large (click)="connect()">Consultar niveles</button>
                 </ion-col>
              </ion-row>
              <ion-row>
@@ -100,8 +86,22 @@
     </ion-grid>
     <ion-grid *ngIf="!authService.isAuthenticated">
       <ion-row justify-content-center>
+        <ion-col col-12>
+            <ion-item>
+              <ion-label stacked>Server</ion-label>
+              <ion-select [(ngModel)]="server_ip">
+                <ion-option value="http://localhost:8080">http://localhost:8080</ion-option>
+                <ion-option value="http://localhost:8082">http://localhost:8082</ion-option>
+                <ion-option value="https://tinaco2.tk">https://tinaco2.tk</ion-option>
+                <ion-option value="http://192.168.1.85:8082">http://192.168.1.85:8082</ion-option>
+                <ion-option value="http://192.168.0.12:8082">http://192.168.0.12:8082</ion-option>
+              </ion-select>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row justify-content-center>
           <ion-col col-4>
-              <button ion-button color="secondary" large (click)="login()">Login</button>
+              <button ion-button color="secondary" large (click)="login()" [disabled]="server_ip==''">Login</button>
           </ion-col>
       </ion-row>
     </ion-grid>
