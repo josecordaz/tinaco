@@ -15,7 +15,7 @@ export class AuthInterceptorService implements HttpInterceptor {
             //.set('Access-Control-Allow-Origin','true')
         });
 
-        alert("MSG := "+JSON.stringify(authRequest))
+        // alert("MSG := "+JSON.stringify(authRequest))
 
         return next.handle(authRequest);
     }
