@@ -39,6 +39,8 @@ export class AuthService {
             password: pass
         };
 
+        // alert("URL "+this.API_URL + '/login')
+
         return this.http.post(this.API_URL + '/login', data, headers)
     }
 

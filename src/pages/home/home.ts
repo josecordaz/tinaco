@@ -108,6 +108,7 @@ export class HomePage {
 
   login(){
     console.log(this.server_ip)
+    this.authService.setApiURL(this.server_ip)
     // alert(document.URL)
     this.authService.login("admin@gmail.com","admin123").subscribe(
       (res: any) => {
