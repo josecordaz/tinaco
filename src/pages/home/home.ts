@@ -50,6 +50,7 @@ export class HomePage {
     this.status_loading = false
     this.s1 = this.http.get(this.authService.API_URL+'/level').subscribe(data=>this.readWaterLevel(data),err=>{
       alert("Error Leyendo Niveles"+JSON.stringify(err))
+      this.authService.logout()
     })
 
     if (this.s2) {
@@ -57,6 +58,7 @@ export class HomePage {
     }
     this.s2 = this.http.get(this.authService.API_URL+'/b_status').subscribe(data=>this.readBombStatus(data),err=>{
       alert("Error Leyendo Bomba"+JSON.stringify(err))
+      this.authService.logout()
     })
     
   }
