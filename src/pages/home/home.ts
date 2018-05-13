@@ -108,13 +108,13 @@ export class HomePage {
 
   login(){
     console.log(this.server_ip)
-    alert(document.URL)
+    // alert(document.URL)
     this.authService.login("admin@gmail.com","admin123").subscribe(
       (res: any) => {
           this.status_loading = true
           this.changeBombStatus()
           localStorage.setItem(this.TOKEN_KEY, res.token);
-      },err=>{
+      },err => {
         alert("Error Login"+JSON.stringify(err))
       }
   );

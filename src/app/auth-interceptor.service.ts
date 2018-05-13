@@ -12,7 +12,10 @@ export class AuthInterceptorService implements HttpInterceptor {
         const authRequest = req.clone({
             // tslint:disable-next-line:max-line-length
             headers: req.headers.set('Authorization', 'Bearer ' + authService.token)
+            //.set('Access-Control-Allow-Origin','true')
         });
+
+        alert("MSG := "+JSON.stringify(authRequest))
 
         return next.handle(authRequest);
     }
