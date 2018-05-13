@@ -11,7 +11,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         const authService = this.injector.get(AuthService);
         const authRequest = req.clone({
             // tslint:disable-next-line:max-line-length
-            headers: req.headers.set('Authorization', 'Bearer ' + authService.token).set('Access-Control-Allow-Origin','*')
+            headers: req.headers.set('Authorization', 'Bearer ' + authService.token)
         });
 
         return next.handle(authRequest);
