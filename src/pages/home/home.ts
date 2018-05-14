@@ -113,8 +113,8 @@ export class HomePage {
     this.authService.login("admin@gmail.com","admin123").subscribe(
       (res: any) => {
           this.status_loading = true
-          this.connect()
           localStorage.setItem(this.TOKEN_KEY, res.token);
+          this.connect()
       },err => {
         alert("Error Login"+JSON.stringify(err))
       }
